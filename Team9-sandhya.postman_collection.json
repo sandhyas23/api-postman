@@ -1206,7 +1206,7 @@
 											"pm.test(\"Response body contains the expected data\", function () {",
 											"    const jsonData = pm.response.json();",
 											"    pm.expect(jsonData.status).to.eql(\"404 NOT_FOUND\");",
-											"    pm.expect(jsonData.message).to.eql(\"User with userId 34343434 not found!\");",
+											"    pm.expect(jsonData.message).to.eql(\"User with userId 3434343478 not found!\");",
 											"",
 											"",
 											"});",
@@ -1671,6 +1671,72 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "with invalid email id format",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// check status code",
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status(\"Bad Request\");",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.status).to.eql(\"400 BAD_REQUEST\");",
+											"    pm.expect(jsonData.message).to.eql(\"User email Id is required and should be in proper email format\");",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"userFirstName\":  \"{{userFirstNameInput}}\",\n \"userLastName\":  \"{{userLastName}}\",\n  \"userContactNumber\":\"{{userIdInput}}\",\n  \"userEmailId\": \"{{userEmailId}}\",\n\n\"userAddress\": {\n  \n }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/createusers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"createusers"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -1710,7 +1776,7 @@
 											"pm.test(\"Response body contains the expected data\", function () {",
 											"    const jsonData = pm.response.json();",
 											"    pm.expect(jsonData.status).to.eql(\"404 NOT_FOUND\");",
-											"    pm.expect(jsonData.message).to.eql(\"User not found with id: 34343434\");",
+											"    pm.expect(jsonData.message).to.eql(\"User not found with id: 3434343478\");",
 											"});",
 											""
 										],
@@ -2041,13 +2107,13 @@
 									"script": {
 										"exec": [
 											"// check status code",
-											"pm.test(\"Status code is 415\", function () {",
-											"    pm.response.to.have.status(415);",
+											"pm.test(\"Status code is 404\", function () {",
+											"    pm.response.to.have.status(404);",
 											"});",
 											"",
 											"// check status line",
 											"pm.test(\"Status line is as expected\", function () {",
-											"    pm.response.to.have.status(\"Unsupported Media Type\");",
+											"    pm.response.to.have.status(\"Not Found\");",
 											"});",
 											"",
 											"// check response headers",
@@ -2065,8 +2131,8 @@
 											"// Test for the actual data",
 											"pm.test(\"Response body contains the expected data\", function () {",
 											"    const jsonData = pm.response.json();",
-											"    pm.expect(jsonData.status).to.eql(415);",
-											"    pm.expect(jsonData.error).to.eql(\"Unsupported Media Type\");",
+											"    pm.expect(jsonData.status).to.eql(\"404 NOT_FOUND\");",
+											"    pm.expect(jsonData.message).to.eql(\"User not found with id: 3434343478\");",
 											"});",
 											""
 										],
@@ -2080,7 +2146,12 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\"userFirstName\":  \"{{patchFirstName}}\",\n \"userLastName\":  \"{{patchLastName}}\",\n\"userContactNumber\": \"{{patchContactNumber}}\",\n\"userAddress\":{\n    \"plotNumber\":\"{{patchPlotNumber}}\"\n}\n\n}"
+									"raw": "{\n\"userFirstName\":  \"{{patchFirstName}}\",\n \"userLastName\":  \"{{patchLastName}}\",\n\"userContactNumber\": \"{{patchContactNumber}}\",\n\"userAddress\":{\n    \"plotNumber\":\"{{patchPlotNumber}}\"\n}\n\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{baseUrl}}/updateuserfields/{{userIdInput}}",
@@ -2291,7 +2362,7 @@
 											"pm.test(\"Response body contains the expected data\", function () {",
 											"    const jsonData = pm.response.json();",
 											"    pm.expect(jsonData.status).to.eql(\"404 NOT_FOUND\");",
-											"    pm.expect(jsonData.message).to.eql(\"User not found with id: 34343434\");",
+											"    pm.expect(jsonData.message).to.eql(\"User not found with id: 3434343478\");",
 											"});",
 											""
 										],

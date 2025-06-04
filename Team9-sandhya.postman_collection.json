@@ -1,0 +1,2475 @@
+{
+	"info": {
+		"_postman_id": "3e547197-d25c-4e80-a3a8-435470722819",
+		"name": "Team9-sandhya",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41586422"
+	},
+	"item": [
+		{
+			"name": "positive",
+			"item": [
+				{
+					"name": "post",
+					"item": [
+						{
+							"name": "new user with only mandatory fields",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = pm.response.json();",
+											"for(let key in jsonData){",
+											"    if(jsonData.hasOwnProperty(key)){",
+											"        pm.collectionVariables.set(\"two\"+key,jsonData[key]);",
+											"    }",
+											"}",
+											"// pm.collectionVariables.set(\"newUserId\",jsonData.userId);",
+											"// pm.collectionVariables.set(\"newUserFirstname\",jsonData.userFirstName);",
+											"// pm.collectionVariables.set()",
+											"",
+											"pm.test(\"Status code is 201\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status('Created');",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"// check response body schema",
+											"pm.test(\"Response body has the expected schema\", function () {",
+											"       const schema = {",
+											"        \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+											"        \"title\": \"Generated schema for Root\",",
+											"        \"type\": \"array\",",
+											"        \"properties\": {",
+											"            \"userAddress\": {",
+											"                \"type\": \"object\",",
+											"                \"properties\": {",
+											"                    \"addressId\": { \"type\": \"number\" },",
+											"                    \"plotNumber\": { \"type\": \"string\" },",
+											"                    \"street\": { \"type\": \"string\" },",
+											"                    \"state\": { \"type\": \"string\" },",
+											"                    \"country\": { \"type\": \"string\" },",
+											"                    \"zipCode\": { \"type\": \"number\" }",
+											"                },",
+											"                \"required\": [\"addressId\", \"plotNumber\", \"street\", \"state\", \"country\", \"zipCode\"]",
+											"            },",
+											"            \"userId\": { \"type\": \"number\" },",
+											"            \"userFirstName\": { \"type\": \"string\" },",
+											"            \"userLastName\": { \"type\": \"string\" },",
+											"            \"userContactNumber\": { \"type\": \"number\" },",
+											"            \"userEmailId\": { \"type\": \"string\" },",
+											"            \"creationTime\": { \"type\": \"string\" },",
+											"            \"lastModTime\": { \"type\": \"string\" }",
+											"        },",
+											"        \"required\": [\"userAddress\", \"user_id\", \"userFirstName\", \"userLastName\", \"userContactNumber\", \"userEmailId\", \"creationTime\", \"lastModTime\"]",
+											"    };",
+											"});",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.userId).to.eql(pm.collectionVariables.get(\"twouserId\"));",
+											"    pm.expect(jsonData.userFirstName).to.eql(pm.collectionVariables.get(\"twouserFirstName\"));",
+											"    pm.expect(jsonData.userLastName).to.eql(pm.collectionVariables.get(\"twouserLastName\"));",
+											"    pm.expect(jsonData.userContactNumber).to.eql(pm.collectionVariables.get(\"twouserContactNumber\"));",
+											"    pm.expect(jsonData.userEmailId).to.eql(pm.collectionVariables.get(\"twouserEmailId\"));",
+											"    pm.expect(jsonData.userAddress).to.eql(pm.collectionVariables.get(\"twouserAddress\"));",
+											"",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"userFirstName\":  \"{{userFirstNameInput}}\",\n \"userLastName\":  \"{{userLastName}}\",\n  \"userContactNumber\": \"{{userContactNumberTwo}}\",\n  \"userEmailId\": \"{{userEmailIdTwo}}\",\n  \"userAddress\":{\n\n  }\n\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/createusers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"createusers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "new user with all fields",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = pm.response.json();",
+											"for(let key in jsonData){",
+											"    if(jsonData.hasOwnProperty(key)){",
+											"        pm.collectionVariables.set(key,jsonData[key]);",
+											"    }",
+											"}",
+											"// pm.collectionVariables.set(\"newUserId\",jsonData.userId);",
+											"// pm.collectionVariables.set(\"newUserFirstname\",jsonData.userFirstName);",
+											"// pm.collectionVariables.set()",
+											"",
+											"pm.test(\"Status code is 201\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status('Created');",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"// check response body schema",
+											"pm.test(\"Response body has the expected schema\", function () {",
+											"       const schema = {",
+											"        \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+											"        \"title\": \"Generated schema for Root\",",
+											"        \"type\": \"array\",",
+											"        \"properties\": {",
+											"            \"userAddress\": {",
+											"                \"type\": \"object\",",
+											"                \"properties\": {",
+											"                    \"addressId\": { \"type\": \"number\" },",
+											"                    \"plotNumber\": { \"type\": \"string\" },",
+											"                    \"street\": { \"type\": \"string\" },",
+											"                    \"state\": { \"type\": \"string\" },",
+											"                    \"country\": { \"type\": \"string\" },",
+											"                    \"zipCode\": { \"type\": \"number\" }",
+											"                },",
+											"                \"required\": [\"addressId\", \"plotNumber\", \"street\", \"state\", \"country\", \"zipCode\"]",
+											"            },",
+											"            \"userId\": { \"type\": \"number\" },",
+											"            \"userFirstName\": { \"type\": \"string\" },",
+											"            \"userLastName\": { \"type\": \"string\" },",
+											"            \"userContactNumber\": { \"type\": \"number\" },",
+											"            \"userEmailId\": { \"type\": \"string\" },",
+											"            \"creationTime\": { \"type\": \"string\" },",
+											"            \"lastModTime\": { \"type\": \"string\" }",
+											"        },",
+											"        \"required\": [\"userAddress\", \"user_id\", \"userFirstName\", \"userLastName\", \"userContactNumber\", \"userEmailId\", \"creationTime\", \"lastModTime\"]",
+											"    };",
+											"});",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.userId).to.eql(pm.collectionVariables.get(\"userId\"));",
+											"    pm.expect(jsonData.userFirstName).to.eql(pm.collectionVariables.get(\"userFirstName\"));",
+											"    pm.expect(jsonData.userLastName).to.eql(pm.collectionVariables.get(\"userLastName\"));",
+											"    pm.expect(jsonData.userContactNumber).to.eql(pm.collectionVariables.get(\"userContactNumber\"));",
+											"    pm.expect(jsonData.userEmailId).to.eql(pm.collectionVariables.get(\"userEmailId\"));",
+											"    pm.expect(jsonData.userAddress).to.eql(pm.collectionVariables.get(\"userAddress\"));",
+											"",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const userIdForDel = pm.collectionVariables.get(\"twouserId\").toString();",
+											"console.log(userIdForDel);",
+											"const deleteRequest = {",
+											"    url: \"https://userserviceapp-f5a54828541b.herokuapp.com/uap/deleteuser/\"+userIdForDel,",
+											"    method: 'DELETE',",
+											"    header: {",
+											"        'Content-Type': 'application/json'",
+											"    }",
+											"};",
+											"",
+											"pm.sendRequest(deleteRequest, function (err, res){",
+											"    err ? console.log(err) : console.log(res.json());",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"userFirstName\":  \"{{userFirstNameInput}}\",\n \"userLastName\":  \"{{userLastName}}\",\n  \"userContactNumber\": \"{{userContactNumber}}\",\n  \"userEmailId\": \"{{userEmailId}}\",\n\n\"userAddress\": {\n   \"plotNumber\": \"{{plotNumber}}\",\n   \"street\": \"{{street}}\",\n   \"state\": \"{{state}}\",\n    \"country\": \"{{country}}\",\n   \"zipCode\": \"{{zipCode}}\"\n }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/createusers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"createusers"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "get",
+					"item": [
+						{
+							"name": "all users",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// check status code",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status('OK');",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"// check response body schema",
+											"pm.test(\"Response body has the expected schema\", function () {",
+											"       const schema = {",
+											"        \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+											"        \"title\": \"Generated schema for Root\",",
+											"        \"type\": \"array\",",
+											"        \"properties\": {",
+											"            \"userAddress\": {",
+											"                \"type\": \"object\",",
+											"                \"properties\": {",
+											"                    \"addressId\": { \"type\": \"number\" },",
+											"                    \"plotNumber\": { \"type\": \"string\" },",
+											"                    \"street\": { \"type\": \"string\" },",
+											"                    \"state\": { \"type\": \"string\" },",
+											"                    \"country\": { \"type\": \"string\" },",
+											"                    \"zipCode\": { \"type\": \"number\" }",
+											"                },",
+											"                \"required\": [\"addressId\", \"plotNumber\", \"street\", \"state\", \"country\", \"zipCode\"]",
+											"            },",
+											"            \"userId\": { \"type\": \"number\" },",
+											"            \"userFirstName\": { \"type\": \"string\" },",
+											"            \"userLastName\": { \"type\": \"string\" },",
+											"            \"userContactNumber\": { \"type\": \"number\" },",
+											"            \"userEmailId\": { \"type\": \"string\" },",
+											"            \"creationTime\": { \"type\": \"string\" },",
+											"            \"lastModTime\": { \"type\": \"string\" }",
+											"        },",
+											"        \"required\": [\"userAddress\", \"user_id\", \"userFirstName\", \"userLastName\", \"userContactNumber\", \"userEmailId\", \"creationTime\", \"lastModTime\"]",
+											"    };",
+											"});",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Number of users\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.length).to.greaterThanOrEqual(1);",
+											"",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "user by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// check status code",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status('OK');",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"// check response body schema",
+											"pm.test(\"Response body has the expected schema\", function () {",
+											"       const schema = {",
+											"        \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+											"        \"title\": \"Generated schema for Root\",",
+											"        \"type\": \"array\",",
+											"        \"properties\": {",
+											"            \"userAddress\": {",
+											"                \"type\": \"object\",",
+											"                \"properties\": {",
+											"                    \"addressId\": { \"type\": \"number\" },",
+											"                    \"plotNumber\": { \"type\": \"string\" },",
+											"                    \"street\": { \"type\": \"string\" },",
+											"                    \"state\": { \"type\": \"string\" },",
+											"                    \"country\": { \"type\": \"string\" },",
+											"                    \"zipCode\": { \"type\": \"number\" }",
+											"                },",
+											"                \"required\": [\"addressId\", \"plotNumber\", \"street\", \"state\", \"country\", \"zipCode\"]",
+											"            },",
+											"            \"userId\": { \"type\": \"number\" },",
+											"            \"userFirstName\": { \"type\": \"string\" },",
+											"            \"userLastName\": { \"type\": \"string\" },",
+											"            \"userContactNumber\": { \"type\": \"number\" },",
+											"            \"userEmailId\": { \"type\": \"string\" },",
+											"            \"creationTime\": { \"type\": \"string\" },",
+											"            \"lastModTime\": { \"type\": \"string\" }",
+											"        },",
+											"        \"required\": [\"userAddress\", \"user_id\", \"userFirstName\", \"userLastName\", \"userContactNumber\", \"userEmailId\", \"creationTime\", \"lastModTime\"]",
+											"    };",
+											"});",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.userId).to.eql(pm.collectionVariables.get(\"userId\"));",
+											"    pm.expect(jsonData.userFirstName).to.eql(pm.collectionVariables.get(\"userFirstName\"));",
+											"    pm.expect(jsonData.userLastName).to.eql(pm.collectionVariables.get(\"userLastName\"));",
+											"    pm.expect(jsonData.userContactNumber).to.eql(pm.collectionVariables.get(\"userContactNumber\"));",
+											"    pm.expect(jsonData.userEmailId).to.eql(pm.collectionVariables.get(\"userEmailId\"));",
+											"    pm.expect(jsonData.userAddress).to.eql(pm.collectionVariables.get(\"userAddress\"));",
+											"",
+											"",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/{{userId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "user by user firstname",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// check status code",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status('OK');",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"// check response body schema",
+											"pm.test(\"Response body has the expected schema\", function () {",
+											"       const schema = {",
+											"        \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+											"        \"title\": \"Generated schema for Root\",",
+											"        \"type\": \"array\",",
+											"        \"properties\": {",
+											"            \"userAddress\": {",
+											"                \"type\": \"object\",",
+											"                \"properties\": {",
+											"                    \"addressId\": { \"type\": \"number\" },",
+											"                    \"plotNumber\": { \"type\": \"string\" },",
+											"                    \"street\": { \"type\": \"string\" },",
+											"                    \"state\": { \"type\": \"string\" },",
+											"                    \"country\": { \"type\": \"string\" },",
+											"                    \"zipCode\": { \"type\": \"number\" }",
+											"                },",
+											"                \"required\": [\"addressId\", \"plotNumber\", \"street\", \"state\", \"country\", \"zipCode\"]",
+											"            },",
+											"            \"userId\": { \"type\": \"number\" },",
+											"            \"userFirstName\": { \"type\": \"string\" },",
+											"            \"userLastName\": { \"type\": \"string\" },",
+											"            \"userContactNumber\": { \"type\": \"number\" },",
+											"            \"userEmailId\": { \"type\": \"string\" },",
+											"            \"creationTime\": { \"type\": \"string\" },",
+											"            \"lastModTime\": { \"type\": \"string\" }",
+											"        },",
+											"        \"required\": [\"userAddress\", \"user_id\", \"userFirstName\", \"userLastName\", \"userContactNumber\", \"userEmailId\", \"creationTime\", \"lastModTime\"]",
+											"    };",
+											"});",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"   ",
+											"  for(let user of jsonData){",
+											"        pm.expect(user.userFirstName).to.eql(pm.collectionVariables.get(\"userFirstName\"));       ",
+											"  }",
+											"    ",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/username/{{userFirstName}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"username",
+										"{{userFirstName}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "patch",
+					"item": [
+						{
+							"name": "update only contact number",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = pm.response.json();",
+											"for(let key in jsonData){",
+											"    if(jsonData.hasOwnProperty(key)){",
+											"        pm.collectionVariables.set(key,jsonData[key]);",
+											"    }",
+											"}",
+											"// pm.collectionVariables.set(\"newUserId\",jsonData.userId);",
+											"// pm.collectionVariables.set(\"newUserFirstname\",jsonData.userFirstName);",
+											"// pm.collectionVariables.set()",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status('OK');",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"// check response body schema",
+											"pm.test(\"Response body has the expected schema\", function () {",
+											"       const schema = {",
+											"        \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+											"        \"title\": \"Generated schema for Root\",",
+											"        \"type\": \"array\",",
+											"        \"properties\": {",
+											"            \"userAddress\": {",
+											"                \"type\": \"object\",",
+											"                \"properties\": {",
+											"                    \"addressId\": { \"type\": \"number\" },",
+											"                    \"plotNumber\": { \"type\": \"string\" },",
+											"                    \"street\": { \"type\": \"string\" },",
+											"                    \"state\": { \"type\": \"string\" },",
+											"                    \"country\": { \"type\": \"string\" },",
+											"                    \"zipCode\": { \"type\": \"number\" }",
+											"                },",
+											"                \"required\": [\"addressId\", \"plotNumber\", \"street\", \"state\", \"country\", \"zipCode\"]",
+											"            },",
+											"            \"userId\": { \"type\": \"number\" },",
+											"            \"userFirstName\": { \"type\": \"string\" },",
+											"            \"userLastName\": { \"type\": \"string\" },",
+											"            \"userContactNumber\": { \"type\": \"number\" },",
+											"            \"userEmailId\": { \"type\": \"string\" },",
+											"            \"creationTime\": { \"type\": \"string\" },",
+											"            \"lastModTime\": { \"type\": \"string\" }",
+											"        },",
+											"        \"required\": [\"userAddress\", \"user_id\", \"userFirstName\", \"userLastName\", \"userContactNumber\", \"userEmailId\", \"creationTime\", \"lastModTime\"]",
+											"    };",
+											"});",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.userId).to.eql(pm.collectionVariables.get(\"userId\"));",
+											"    pm.expect(jsonData.userFirstName).to.eql(pm.collectionVariables.get(\"userFirstName\"));",
+											"    pm.expect(jsonData.userLastName).to.eql(pm.collectionVariables.get(\"userLastName\"));",
+											"    pm.expect(jsonData.userContactNumber).to.eql(pm.collectionVariables.get(\"userContactNumber\"));",
+											"    pm.expect(jsonData.userEmailId).to.eql(pm.collectionVariables.get(\"userEmailId\"));",
+											"    pm.expect(jsonData.userAddress).to.eql(pm.collectionVariables.get(\"userAddress\"));",
+											"",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"userContactNumber\": \"{{patchContactNumber}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/updateuserfields/{{userId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"updateuserfields",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update first and last name",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"userFirstName\":  \"{{patchFirstName}}\",\n\"userLastName\":  \"{{patchLastName}}\"\n\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/updateuserfields/{{userId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"updateuserfields",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update plot number",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"userAddress\":{\n    \"plotNumber\":\"{{patchPlotNumber}}\"\n}\n\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/updateuserfields/{{userId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"updateuserfields",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "put",
+					"item": [
+						{
+							"name": "update all details for user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = pm.response.json();",
+											"for(let key in jsonData){",
+											"    if(jsonData.hasOwnProperty(key)){",
+											"        pm.collectionVariables.set(key,jsonData[key]);",
+											"    }",
+											"}",
+											"// pm.collectionVariables.set(\"newUserId\",jsonData.userId);",
+											"// pm.collectionVariables.set(\"newUserFirstname\",jsonData.userFirstName);",
+											"// pm.collectionVariables.set()",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status('OK');",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"// check response body schema",
+											"pm.test(\"Response body has the expected schema\", function () {",
+											"       const schema = {",
+											"        \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+											"        \"title\": \"Generated schema for Root\",",
+											"        \"type\": \"array\",",
+											"        \"properties\": {",
+											"            \"userAddress\": {",
+											"                \"type\": \"object\",",
+											"                \"properties\": {",
+											"                    \"addressId\": { \"type\": \"number\" },",
+											"                    \"plotNumber\": { \"type\": \"string\" },",
+											"                    \"street\": { \"type\": \"string\" },",
+											"                    \"state\": { \"type\": \"string\" },",
+											"                    \"country\": { \"type\": \"string\" },",
+											"                    \"zipCode\": { \"type\": \"number\" }",
+											"                },",
+											"                \"required\": [\"addressId\", \"plotNumber\", \"street\", \"state\", \"country\", \"zipCode\"]",
+											"            },",
+											"            \"userId\": { \"type\": \"number\" },",
+											"            \"userFirstName\": { \"type\": \"string\" },",
+											"            \"userLastName\": { \"type\": \"string\" },",
+											"            \"userContactNumber\": { \"type\": \"number\" },",
+											"            \"userEmailId\": { \"type\": \"string\" },",
+											"            \"creationTime\": { \"type\": \"string\" },",
+											"            \"lastModTime\": { \"type\": \"string\" }",
+											"        },",
+											"        \"required\": [\"userAddress\", \"user_id\", \"userFirstName\", \"userLastName\", \"userContactNumber\", \"userEmailId\", \"creationTime\", \"lastModTime\"]",
+											"    };",
+											"});",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.userId).to.eql(pm.collectionVariables.get(\"userId\"));",
+											"    pm.expect(jsonData.userFirstName).to.eql(pm.collectionVariables.get(\"userFirstName\"));",
+											"    pm.expect(jsonData.userLastName).to.eql(pm.collectionVariables.get(\"userLastName\"));",
+											"    pm.expect(jsonData.userContactNumber).to.eql(pm.collectionVariables.get(\"userContactNumber\"));",
+											"    pm.expect(jsonData.userEmailId).to.eql(pm.collectionVariables.get(\"userEmailId\"));",
+											"    pm.expect(jsonData.userAddress).to.eql(pm.collectionVariables.get(\"userAddress\"));",
+											"",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"if(pm.iterationData.get(\"updateFirstName\") == \"lily\"){",
+											"    pm.execution.setNextRequest(\"user by user first name\");",
+											"}",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"userFirstName\":  \"{{updateFirstName}}\",\n \"userLastName\":  \"{{updateLastName}}\",\n  \"userContactNumber\": \"{{updateContactNumber}}\",\n  \"userEmailId\": \"{{updateContactEmail}}\",\n\n\"userAddress\": {\n   \"plotNumber\": \"{{updatePlotNumber}}\",\n   \"street\": \"{{updateStreet}}\",\n   \"state\": \"{{updateState}}\",\n    \"country\": \"{{updateCountry}}\",\n   \"zipCode\": \"{{updateZipCode}}\"\n }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/updateuser/{{userId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"updateuser",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "delete",
+					"item": [
+						{
+							"name": "user by user id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// check status code",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status('OK');",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"// check response body schema",
+											"pm.test(\"Response body has the expected schema\", function () {",
+											"       const schema = {",
+											"        \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+											"        \"title\": \"Generated schema for Root\",",
+											"        \"type\": \"array\",",
+											"        \"properties\": {",
+											"            \"userAddress\": {",
+											"                \"type\": \"object\",",
+											"                \"properties\": {",
+											"                    \"addressId\": { \"type\": \"number\" },",
+											"                    \"plotNumber\": { \"type\": \"string\" },",
+											"                    \"street\": { \"type\": \"string\" },",
+											"                    \"state\": { \"type\": \"string\" },",
+											"                    \"country\": { \"type\": \"string\" },",
+											"                    \"zipCode\": { \"type\": \"number\" }",
+											"                },",
+											"                \"required\": [\"addressId\", \"plotNumber\", \"street\", \"state\", \"country\", \"zipCode\"]",
+											"            },",
+											"            \"userId\": { \"type\": \"number\" },",
+											"            \"userFirstName\": { \"type\": \"string\" },",
+											"            \"userLastName\": { \"type\": \"string\" },",
+											"            \"userContactNumber\": { \"type\": \"number\" },",
+											"            \"userEmailId\": { \"type\": \"string\" },",
+											"            \"creationTime\": { \"type\": \"string\" },",
+											"            \"lastModTime\": { \"type\": \"string\" }",
+											"        },",
+											"        \"required\": [\"userAddress\", \"user_id\", \"userFirstName\", \"userLastName\", \"userContactNumber\", \"userEmailId\", \"creationTime\", \"lastModTime\"]",
+											"    };",
+											"});",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.status).to.eql(\"Success\");",
+											"    pm.expect(jsonData.message).to.eql(\"User is deleted successfully\");",
+											"",
+											"",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"if(pm.iterationData.get(\"updateFirstName\") == \"june\"){",
+											"    pm.execution.setNextRequest(null);",
+											"}",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "userapi@2025",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "Numpy@gmail.com",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/deleteuser/{{userId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"deleteuser",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "user by user first name",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"if(pm.iterationData.get(\"scenario\") == \"positive\"){",
+											"    pm.execution.setNextRequest(\"null\");",
+											"}"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// check status code",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status('OK');",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"// check response body schema",
+											"pm.test(\"Response body has the expected schema\", function () {",
+											"       const schema = {",
+											"        \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+											"        \"title\": \"Generated schema for Root\",",
+											"        \"type\": \"array\",",
+											"        \"properties\": {",
+											"            \"userAddress\": {",
+											"                \"type\": \"object\",",
+											"                \"properties\": {",
+											"                    \"addressId\": { \"type\": \"number\" },",
+											"                    \"plotNumber\": { \"type\": \"string\" },",
+											"                    \"street\": { \"type\": \"string\" },",
+											"                    \"state\": { \"type\": \"string\" },",
+											"                    \"country\": { \"type\": \"string\" },",
+											"                    \"zipCode\": { \"type\": \"number\" }",
+											"                },",
+											"                \"required\": [\"addressId\", \"plotNumber\", \"street\", \"state\", \"country\", \"zipCode\"]",
+											"            },",
+											"            \"userId\": { \"type\": \"number\" },",
+											"            \"userFirstName\": { \"type\": \"string\" },",
+											"            \"userLastName\": { \"type\": \"string\" },",
+											"            \"userContactNumber\": { \"type\": \"number\" },",
+											"            \"userEmailId\": { \"type\": \"string\" },",
+											"            \"creationTime\": { \"type\": \"string\" },",
+											"            \"lastModTime\": { \"type\": \"string\" }",
+											"        },",
+											"        \"required\": [\"userAddress\", \"user_id\", \"userFirstName\", \"userLastName\", \"userContactNumber\", \"userEmailId\", \"creationTime\", \"lastModTime\"]",
+											"    };",
+											"});",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.status).to.eql(\"Success\");",
+											"    pm.expect(jsonData.message).to.eql(\"User is deleted successfully\");",
+											"",
+											"",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "userapi@2025",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "Numpy@gmail.com",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/deleteuser/username/{{userFirstName}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"deleteuser",
+										"username",
+										"{{userFirstName}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"description": "positive scenarios for the API",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"if(pm.iterationData.get(\"scenario\") == \"negative\"){",
+							"    console.log(\"negative scenario\");",
+							"    pm.execution.setNextRequest(\"get user by invalid user id\");",
+							"    pm.execution.skipRequest();",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "negative",
+			"item": [
+				{
+					"name": "get",
+					"item": [
+						{
+							"name": "get user by invalid user id",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// check status code",
+											"pm.test(\"Status code is 404\", function () {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status(\"Not Found\");",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.status).to.eql(\"404 NOT_FOUND\");",
+											"    pm.expect(jsonData.message).to.eql(\"User with userId 34343434 not found!\");",
+											"",
+											"",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "userapi@2025",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "Numpy@gmail.com",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/{{userIdInput}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"{{userIdInput}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "user by invalid user firstname",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// check status code",
+											"pm.test(\"Status code is 404\", function () {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status(\"Not Found\");",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.status).to.eql(\"404 NOT_FOUND\");",
+											"    pm.expect(jsonData.message).to.eql(\"User with userFirstName no first name not found!\");",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "userapi@2025",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "Numpy@gmail.com",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/username/{{userFirstNameInput}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"username",
+										"{{userFirstNameInput}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "post",
+					"item": [
+						{
+							"name": "without mandatory fields",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// check status code",
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status(\"Bad Request\");",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.status).to.eql(\"400 BAD_REQUEST\");",
+											"    pm.expect(jsonData.message).to.eql(\"Phone Number is required and should contains 10 numeric values only\");",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"userFirstName\":  \"{{userFirstNameInput}}\",\n \"userLastName\":  \"{{userLastName}}\",\n \n \n\n\n\"userAddress\": {\n   \"plotNumber\": \"{{plotNumber}}\",\n   \"street\": \"{{street}}\",\n   \"state\": \"{{state}}\",\n    \"country\": \"{{country}}\",\n   \"zipCode\": \"{{zipCode}}\"\n }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/createusers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"createusers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "invalid values for mandatory fields",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// check status code",
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status(\"Bad Request\");",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.status).to.eql(\"400 BAD_REQUEST\");",
+											"    pm.expect(jsonData.message).to.eql(\"Phone Number is required and should contains 10 numeric values only\");",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"userFirstName\":  \"{{userFirstNameInput}}\",\n \"userLastName\":  \"{{userLastName}}\",\n  \"userEmailId\": \"{{userEmailId}}\",\n \"userContactNumber\": \"{{userContactNumber}}\",\n \n\n\n\"userAddress\": {\n   \"plotNumber\": \"{{plotNumber}}\",\n   \"street\": \"{{street}}\",\n   \"state\": \"{{state}}\",\n    \"country\": \"{{country}}\",\n   \"zipCode\": \"{{zipCode}}\"\n }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/createusers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"createusers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "invalid endpoint",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// check status code",
+											"pm.test(\"Status code is 404\", function () {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status(\"Not Found\");",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.status).to.eql(404);",
+											"    pm.expect(jsonData.error).to.eql(\"Not Found\");",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"userFirstName\":  \"{{userFirstNameInput}}\",\n \"userLastName\":  \"{{userLastName}}\",\n \"userContactNumber\": \"{{userContactNumber}}\",\n  \"userEmailId\": \"{{userEmailId}}\",\n\n\n\"userAddress\": {\n   \"plotNumber\": \"{{plotNumber}}\",\n   \"street\": \"{{street}}\",\n   \"state\": \"{{state}}\",\n    \"country\": \"{{country}}\",\n   \"zipCode\": \"{{zipCode}}\"\n }\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/createuser",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"createuser"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "with existing email id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// check status code",
+											"pm.test(\"Status code is 409\", function () {",
+											"    pm.response.to.have.status(409);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status(\"Conflict\");",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.status).to.eql(\"409 CONFLICT\");",
+											"    pm.expect(jsonData.message).to.eql(\"User already exist with same email id\");",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"userFirstName\":  \"{{userFirstNameInput}}\",\n \"userLastName\":  \"{{userLastName}}\",\n  \"userContactNumber\": \"{{updateContactNumber}}\",\n  \"userEmailId\": \"{{updateContactEmail}}\",\n\n\"userAddress\": {\n  \n }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/createusers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"createusers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "with existing contact number",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// check status code",
+											"pm.test(\"Status code is 409\", function () {",
+											"    pm.response.to.have.status(409);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status(\"Conflict\");",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.status).to.eql(\"409 CONFLICT\");",
+											"    pm.expect(jsonData.message).to.eql(\"User already exist with same contact number\");",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"userFirstName\":  \"{{userFirstNameInput}}\",\n \"userLastName\":  \"{{userLastName}}\",\n  \"userContactNumber\": \"{{updateContactNumber}}\",\n  \"userEmailId\": \"123.{{updateContactEmail}}\",\n\n\"userAddress\": {\n  \n }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/createusers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"createusers"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "put",
+					"item": [
+						{
+							"name": "update invalid userId",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// check status code",
+											"pm.test(\"Status code is 404\", function () {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status(\"Not Found\");",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.status).to.eql(\"404 NOT_FOUND\");",
+											"    pm.expect(jsonData.message).to.eql(\"User not found with id: 34343434\");",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "userapi@2025",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "Numpy@gmail.com",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"userFirstName\":  \"{{updateFirstName}}\",\n \"userLastName\":  \"{{updateLastName}}\",\n  \"userContactNumber\": \"{{updateContactNumber}}\",\n  \"userEmailId\": \"{{updateContactEmail}}\",\n\n\"userAddress\": {\n   \"plotNumber\": \"{{updatePlotNumber}}\",\n   \"street\": \"{{updateStreet}}\",\n   \"state\": \"{{updateState}}\",\n    \"country\": \"{{updateCountry}}\",\n   \"zipCode\": \"{{updateZipCode}}\"\n }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/updateuser/{{userIdInput}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"updateuser",
+										"{{userIdInput}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update without mandatory fields",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const postRequest = {",
+											"    url: \"https://userserviceapp-f5a54828541b.herokuapp.com/uap/createusers\",",
+											"    method: 'POST',",
+											"    header: {",
+											"        'Content-Type': 'application/json'",
+											"    },",
+											"    body: {",
+											"        mode: 'raw',",
+											"        raw: JSON.stringify(",
+											"            {",
+											"                \"userFirstName\":  \"apples\",",
+											"                \"userLastName\":  \"fruit\",",
+											"                \"userContactNumber\": 5678903412,",
+											"                \"userEmailId\": \"apples@fruit.com\",",
+											"                \"userAddress\": {}",
+											"            }",
+											"",
+											"        )",
+											"    }",
+											"};",
+											"",
+											"pm.sendRequest(postRequest, function (err, res){",
+											"    if (err) {",
+											"        console.log(err);",
+											"    } else {",
+											"        let jsondata = res.json();",
+											"        pm.collectionVariables.set(\"userIdForPut\",jsondata.userId);",
+											"            console.log(jsondata);",
+											"       ",
+											"    }",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// check status code",
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status(\"Bad Request\");",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.status).to.eql(\"400 BAD_REQUEST\");",
+											"    pm.expect(jsonData.message).to.eql(\"User First Name is mandatory and should contains alphabets only\");",
+											"});",
+											"",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "userapi@2025",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "Numpy@gmail.com",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"userFirstName\":  \"{{updateFirstNameInput}}\",\n \"userLastName\":  \"{{updateLastName}}\",\n  \"userEmailId\": \"{{updateContactEmail}}\",\n\n\"userAddress\": {\n   \"plotNumber\": \"{{updatePlotNumber}}\",\n   \"street\": \"{{updateStreet}}\",\n   \"state\": \"{{updateState}}\",\n    \"country\": \"{{updateCountry}}\",\n   \"zipCode\": \"{{updateZipCode}}\"\n }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/updateuser/{{userIdForPut}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"updateuser",
+										"{{userIdForPut}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update with existing email id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// check status code",
+											"pm.test(\"Status code is 409\", function () {",
+											"    pm.response.to.have.status(409);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status(\"Conflict\");",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.status).to.eql(\"409 CONFLICT\");",
+											"    pm.expect(jsonData.message).to.eql(\"User already exist with same email id\");",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"userFirstName\":  \"{{updateFirstNameInput}}\",\n \"userLastName\":  \"{{updateLastName}}\",\n \"userContactNumber\": \"{{updateContactNumber}}\",\n  \"userEmailId\": \"{{updateContactEmail}}\",\n\n\"userAddress\": {\n   \"plotNumber\": \"{{updatePlotNumber}}\",\n   \"street\": \"{{updateStreet}}\",\n   \"state\": \"{{updateState}}\",\n    \"country\": \"{{updateCountry}}\",\n   \"zipCode\": \"{{updateZipCode}}\"\n }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/updateuser/{{userIdForPut}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"updateuser",
+										"{{userIdForPut}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update with existing contact number",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// check status code",
+											"pm.test(\"Status code is 409\", function () {",
+											"    pm.response.to.have.status(409);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status(\"Conflict\");",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.status).to.eql(\"409 CONFLICT\");",
+											"    pm.expect(jsonData.message).to.eql(\"User already exist with same contact number\");",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"userFirstName\":  \"{{updateFirstNameInput}}\",\n \"userLastName\":  \"{{updateLastName}}\",\n \"userContactNumber\": \"{{updateContactNumber}}\",\n  \"userEmailId\": \"123.{{updateContactEmail}}\",\n\n\"userAddress\": {\n   \"plotNumber\": \"{{updatePlotNumber}}\",\n   \"street\": \"{{updateStreet}}\",\n   \"state\": \"{{updateState}}\",\n    \"country\": \"{{updateCountry}}\",\n   \"zipCode\": \"{{updateZipCode}}\"\n }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/updateuser/{{userIdForPut}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"updateuser",
+										"{{userIdForPut}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "patch",
+					"item": [
+						{
+							"name": "patch update invalid userid",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// check status code",
+											"pm.test(\"Status code is 415\", function () {",
+											"    pm.response.to.have.status(415);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status(\"Unsupported Media Type\");",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.status).to.eql(415);",
+											"    pm.expect(jsonData.error).to.eql(\"Unsupported Media Type\");",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"userFirstName\":  \"{{patchFirstName}}\",\n \"userLastName\":  \"{{patchLastName}}\",\n\"userContactNumber\": \"{{patchContactNumber}}\",\n\"userAddress\":{\n    \"plotNumber\":\"{{patchPlotNumber}}\"\n}\n\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/updateuserfields/{{userIdInput}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"updateuserfields",
+										"{{userIdInput}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "patch update with existing email id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// check status code",
+											"pm.test(\"Status code is 409\", function () {",
+											"    pm.response.to.have.status(409);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status(\"Conflict\");",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.status).to.eql(\"409 CONFLICT\");",
+											"    pm.expect(jsonData.message).to.eql(\"User already exist with same email id\");",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"userEmailId\": \"{{updateContactEmail}}\"\n\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/updateuser/{{userIdForPut}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"updateuser",
+										"{{userIdForPut}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "patch update with existing contact number",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// check status code",
+											"pm.test(\"Status code is 409\", function () {",
+											"    pm.response.to.have.status(409);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status(\"Conflict\");",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.status).to.eql(\"409 CONFLICT\");",
+											"    pm.expect(jsonData.message).to.eql(\"User already exist with same contact number\");",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\n{\n \"userContactNumber\": \"{{updateContactNumber}}\"\n\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/updateuserfields/{{userIdPut}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"updateuserfields",
+										"{{userIdPut}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "delete",
+					"item": [
+						{
+							"name": "user with invalid user id",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const userIdForDel = pm.collectionVariables.get(\"userIdForPut\").toString();",
+											"console.log(userIdForDel);",
+											"const deleteRequest = {",
+											"    url: \"https://userserviceapp-f5a54828541b.herokuapp.com/uap/deleteuser/\"+userIdForDel,",
+											"    method: 'DELETE',",
+											"    header: {",
+											"        'Content-Type': 'application/json'",
+											"    }",
+											"};",
+											"",
+											"pm.sendRequest(deleteRequest, function (err, res){",
+											"    err ? console.log(err) : console.log(res.json());",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// check status code",
+											"pm.test(\"Status code is 404\", function () {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status(\"Not Found\");",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.status).to.eql(\"404 NOT_FOUND\");",
+											"    pm.expect(jsonData.message).to.eql(\"User not found with id: 34343434\");",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "userapi@2025",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "Numpy@gmail.com",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/deleteuser/{{userIdInput}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"deleteuser",
+										"{{userIdInput}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "user with no user id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// check status code",
+											"pm.test(\"Status code is 404\", function () {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											"",
+											"// check status line",
+											"pm.test(\"Status line is as expected\", function () {",
+											"    pm.response.to.have.status(\"Not Found\");",
+											"});",
+											"",
+											"// check response headers",
+											"pm.test(\"Content-Type is present\", function () {",
+											"    pm.response.to.have.header(\"Content-Type\");",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function () {",
+											"    const headersData = pm.response.headers;",
+											"    pm.expect(headersData.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"",
+											"",
+											"// Test for the actual data",
+											"pm.test(\"Response body contains the expected data\", function () {",
+											"    const jsonData = pm.response.json();",
+											"    pm.expect(jsonData.status).to.eql(404);",
+											"    pm.expect(jsonData.error).to.eql(\"Not Found\");",
+											"});",
+											"",
+											"",
+											"",
+											"",
+											"",
+											"pm.environment.clear();",
+											"pm.collectionVariables.clear();",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"packages": {},
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "userapi@2025",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "Numpy@gmail.com",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/deleteuser",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"deleteuser"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"description": "Negative scenarios for all API"
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "userapi@2025",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "Numpy@gmail.com",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"// Define the username and password",
+					"// var username = \"Numpy@gmail.com\";",
+					"// var password = \"userapi@2025\";",
+					"// // Encode the credentials in Base64",
+					"// var encodedCredentials = btoa(username + \":\" + password);",
+					"// // Set the Authorization header with the encoded credentials",
+					"// pm.request.headers.add({",
+					"//  key: 'Authorization',",
+					"//  value: 'Basic ' + encodedCredentials",
+					"// });",
+					"",
+					"pm.collectionVariables.set(\"baseUrl\",\"https://userserviceapp-f5a54828541b.herokuapp.com/uap\")",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
